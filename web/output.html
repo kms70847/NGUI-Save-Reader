@@ -1,0 +1,24 @@
+<html>
+    <body>
+        <input type="file" id="userdata"/>
+        </br>
+        <textarea id="output" rows=100 cols=125></textarea>
+
+        <script src="ngui_reader.bundled.js"></script>
+        <script type="text/javascript">
+            var userdata = document.getElementById("userdata");
+            function file_loaded(buffer){
+                console.log("file loaded.");
+                let result = decode_ngu_save(buffer, true);
+                document.getElementById("output").value = result;
+                console.log(result);
+                console.log("~fin~");
+            }
+            userdata.onchange = function(e){
+                if (userdata.files.length != 0){
+                    userdata.files[0].arrayBuffer().then(file_loaded);
+                }
+            }
+        </script>
+    </body>
+</html>
